@@ -1,4 +1,4 @@
 # lab7
 
-Carrie Lei
-Ishraq Rahman
+- Carrie Lei
+- Ishraq Rahman
