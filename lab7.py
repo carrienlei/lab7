@@ -1,24 +1,20 @@
 import time
-import sys
-import grovepi
 import RPi.GPIO as GPIO
-import Adafruit_GPIO as SPI
+import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-CLK  = 23
-MISO = 21
-MOSI = 19
-CS   = 24
+SPI_PORT=0
+SPI_DEVICE = 0
 
-mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
+mcp = Adafruit_MCP3008.MCP3008(spi = SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 ledPin = 11
 GPIO.setup(11, GPIO.OUT)
-lightThreshold = 500
-soundThreshold = 100
+lightThreshold = 300
+soundThreshold = 450
    
 if __name__ == '__main__':
 	while (True):
@@ -34,7 +30,8 @@ if __name__ == '__main__':
 		#Test 2
 		start = time.time()
 		while (time.time() - start)<5:
-			lightValue = mcp.read_adc(1)
+			lightValue = mcp.read_adc(0)
+			# print(lightValue)
 			if lightValue > lightThreshold:
 				print("bright")
 			else:
@@ -49,23 +46,14 @@ if __name__ == '__main__':
 			GPIO.output(ledPin, 0)
 			time.sleep(.2)
 
-		#Test 4
+		# Test 4
 		start1 = time.time()
 		while (time.time() - start1)<5:
-			soundValue = mcp.read_adc(2)
-			print(soundValue)
+			soundValue = mcp.read_adc(1)
+			# print(soundValue)
 			if (soundValue > soundThreshold):
 				GPIO.output(ledPin, 1)
 				time.sleep(.1)
 				GPIO.output(ledPin, 0)
 				time.sleep(.1)
 			time.sleep(0.1)
-
-
-
-
-
-
-
-
-
