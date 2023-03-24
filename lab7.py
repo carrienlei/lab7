@@ -14,7 +14,7 @@ mcp = Adafruit_MCP3008.MCP3008(spi = SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 ledPin = 11
 GPIO.setup(11, GPIO.OUT)
 lightThreshold = 300
-soundThreshold = 450
+soundThreshold = 550
    
 if __name__ == '__main__':
 	while (True):
