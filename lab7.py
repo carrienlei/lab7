@@ -21,7 +21,6 @@ if __name__ == '__main__':
 		#Test 1
 		num1=5
 		for _ in range(num1):
-
 			GPIO.output(ledPin, 1)
 			time.sleep(.5)
 			GPIO.output(ledPin, 0)
@@ -31,7 +30,7 @@ if __name__ == '__main__':
 		start = time.time()
 		while (time.time() - start)<5:
 			lightValue = mcp.read_adc(0)
-			# print(lightValue)
+			print(lightValue)
 			if lightValue > lightThreshold:
 				print("bright")
 			else:
@@ -50,7 +49,7 @@ if __name__ == '__main__':
 		start1 = time.time()
 		while (time.time() - start1)<5:
 			soundValue = mcp.read_adc(1)
-			# print(soundValue)
+			print(soundValue)
 			if (soundValue > soundThreshold):
 				GPIO.output(ledPin, 1)
 				time.sleep(.1)
